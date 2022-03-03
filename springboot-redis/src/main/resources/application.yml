@@ -1,0 +1,60 @@
+spring:
+  profiles:
+    active: testSentinel
+#多环境切换
+---
+#单机模式
+spring:
+  redis:
+    database: 0
+    host: 192.168.17.128
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
+  profiles: testStandalone
+
+---
+#集群模式
+spring:
+  redis:
+    cluster:
+      nodes:
+        - 192.168.17.128:7001
+        - 192.168.17.128:7002
+        - 192.168.17.128:7003
+        - 192.168.17.128:7004
+        - 192.168.17.128:7005
+        - 192.168.17.128:7006
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
+  profiles: testCluster
+---
+
+#主从复制，哨兵模式
+spring:
+  redis:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
+    #哨兵出现问题，但是在redis没问题，暂时解决不了
+#    sentinel:
+#      master: myredis
+#      nodes: 192.168.17.128:26379
+#      password:
+    host: 192.168.17.128
+    port: 6380
+  profiles: testSentinel

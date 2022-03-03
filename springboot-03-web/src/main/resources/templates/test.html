@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="icon" href="../static/favicon.ico" type="image/x-icon">-->
+
+</head>
+<body>
+<h1>test</h1>
+<div th:text="${msg}"></div>
+<div th:utext="${msg}"></div>
+
+<hr>
+<h3 th:each="user:${users}" th:text="${user}"> </h3>
+<!--<h3 th:each="user:${users}" >[[${user}]] </h3>-->
+</body>
+</html>
